@@ -1,5 +1,6 @@
-# Put comments here that give an overall description of what your
-# functions do
+# This is a set of functions that allow the creation and use of a cached matrix object
+# where 'cache' refers to the ability to store the matrix inverse after it has been solved
+
 
 # Args:
 #   m - an invertible square matrix
@@ -26,7 +27,10 @@ makeCacheMatrix <- function(m = matrix()) {
 }
 
 
-## Write a short comment describing this function
+# Args:
+#   cache_matrix - an instance of a cacheMatrix object
+#
+# Returns the inverse of the matrix contained by cache_matrix
 
 cacheSolve = function(cache_matrix) {
   inverse = cache_matrix$get_inverse()
