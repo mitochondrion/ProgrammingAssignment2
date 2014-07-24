@@ -1,15 +1,43 @@
-## Put comments here that give an overall description of what your
-## functions do
+# Put comments here that give an overall description of what your
+# functions do
 
-## Write a short comment describing this function
+# Args:
+#   m - an invertible square matrix
+# 
+# Returns an instance of a CacheMatrix object with the following
+# instance methods:
+#   set_matrix - sets the matrix
+#   get_matrix - gets the matrix
+#   set_inverse - caches the inverse of the matrix
+#   get_inverse - gets the cached inverse of the matrix
 
-makeCacheMatrix <- function(x = matrix()) {
-
+makeCacheMatrix <- function(m = matrix()) {
+  inverse = NULL
+  
+  set_matrix  = function(new_m) { m <<- new_m; inverse <<- NULL }
+  get_matrix  = function() { m }
+  set_inverse = function(inverse) { inverse <<- inverse }
+  get_inverse = function() { inverse }
+  
+  list(set_matrix  = set_matrix,
+       get_matrix  = get_matrix,
+       set_inverse = set_inverse,
+       get_inverse = get_inverse)
 }
 
 
 ## Write a short comment describing this function
 
-cacheSolve <- function(x, ...) {
-        ## Return a matrix that is the inverse of 'x'
+cacheSolve = function(cache_matrix) {
+  inverse = cache_matrix$get_inverse()
+  
+  if(!is.null(inverse)) {
+    return(inverse)
+  }
+  
+  m = cache_matrix$get_matrix()
+  inverse = solve(m)
+  cache_matrix$set_inverse(inverse)
+  
+  inverse
 }
